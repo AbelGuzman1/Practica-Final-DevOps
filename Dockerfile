@@ -1,15 +1,23 @@
-# Usa la imagen oficial de Node.js como imagen base
+# Usa una imagen base oficial de Node.js.
 FROM node:18-alpine
 
-# Copia los archivos de manifiesto e instala las dependencias
-COPY package*.json ./
-RUN npm install --only=production
+# Establece el directorio de trabajo dentro del contenedor.
+WORKDIR /app
 
-# Copia el resto de los archivos de la aplicaci\u00f3n
+# Copia los archivos de configuraci\u00f3n de dependencias.
+COPY package*.json ./
+
+# Instala las dependencias del proyecto.
+RUN npm install
+
+# Copia el resto de los archivos de la aplicaci\u00f3n.
 COPY . .
 
-# Expone el puerto en el que se ejecutar\u00e1 la aplicaci\u00f3n
+# Ejecuta las pruebas unitarias. Si las pruebas fallan, la construcci\u00f3n se detiene.
+RUN npm test
+
+# Expone el puerto que la aplicaci\u00f3n usa dentro del contenedor.
 EXPOSE 3000
 
-# Comando para iniciar la aplicaci\u00f3n
+# Define el comando para ejecutar la aplicaci\u00f3n cuando se inicia el contenedor.
 CMD ["node", "app.js"]
