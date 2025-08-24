@@ -14,6 +14,7 @@ RUN npm install
 COPY . .
 
 # Ejecuta las pruebas unitarias. Si las pruebas fallan, la construcci\u00f3n se detiene.
+# Este paso es crucial para asegurar que el c\u00f3digo sea v\u00e1lido antes de construir la imagen.
 RUN npm test
 
 # Expone el puerto que la aplicaci\u00f3n usa dentro del contenedor.
