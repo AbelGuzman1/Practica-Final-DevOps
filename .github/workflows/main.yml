@@ -1,19 +1,23 @@
-# Nombre del flujo de trabajo
+# Nombre del flujo de trabajo visible en la interfaz de GitHub Actions
 name: CI/CD Pipeline
 
-# El flujo de trabajo se dispara en un push a la rama main
+# Evento que dispara el flujo de trabajo: cada vez que se hace un 'push' al branch 'main'
 on:
   push:
     branches:
       - main
 
-# Define los trabajos a ejecutar
+# Define los trabajos (jobs) que se ejecutar\u00e1n en este flujo de trabajo
 jobs:
+  # Nombre del primer trabajo: 'build-and-deploy'
   build-and-deploy:
+    # El trabajo se ejecutar\u00e1 en la \u00faltima versi\u00f3n de Ubuntu disponible
     runs-on: ubuntu-latest
 
+    # Define los pasos (steps) que conforman el trabajo
     steps:
-      # Paso 1: Checkout del c\u00f3digo
+      # Paso 1: Checkout del repositorio
+      # Descarga el c\u00f3digo del repositorio en el que se ejecuta el flujo de trabajo
       - name: Checkout repository
         uses: actions/checkout@v2
 
